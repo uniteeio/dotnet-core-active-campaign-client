@@ -1,0 +1,10 @@
+{
+  "0": {
+    "id": "3",
+    "subscriberid": "3",
+    "listid": "1"
+  },
+  "result_code": 1,
+  "result_message": "Success",
+  "result_output": "json"
+}

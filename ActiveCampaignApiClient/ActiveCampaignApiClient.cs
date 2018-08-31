@@ -7,13 +7,15 @@ using Newtonsoft.Json;
 
 namespace ActiveCampaignApiClient
 {
-    public class ActiveCampaignApiClient
+    public class ActiveCampaignApiClient : IActiveCampaignApiClient
     {
-        private readonly ActiveCampaignClientOptions _options;
+        private readonly ActiveCampaignApiClientOptions _options;
+        private readonly HttpClient _httpClient;
 
-        public ActiveCampaignApiClient(ActiveCampaignClientOptions options)
+        public ActiveCampaignApiClient(HttpClient httpClient, ActiveCampaignApiClientOptions options)
         {
             _options = options;
+            _httpClient = httpClient;
         }
 
 
@@ -22,32 +24,34 @@ namespace ActiveCampaignApiClient
             return $"{_options.BaseUri}/admin/api.php?api_action={apiAction}&api_key={_options.ApiKey}&api_output=json";
         }
 
-        public async Task<Result> Call(string apiAction, Dictionary<string, string> parameters)
+        public async Task<ActiveCampaignApiClientResult> Call(string apiAction, Dictionary<string, string> parameters)
         {
             var uri = BuildUri(apiAction);
 
             try
             {
-                using (var httpClient = new HttpClient())
+                var postContent = new FormUrlEncodedContent(parameters);
+
+                var response = await _httpClient.PostAsync(uri, postContent);
+
+                response.EnsureSuccessStatusCode();
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ActiveCampaignApiClientResult>(responseContent);
+
+                if (result.Code == 0)
                 {
-                    var postContent = new FormUrlEncodedContent(parameters);
-
-                    var response = await httpClient.PostAsync(uri, postContent);
-
-                    response.EnsureSuccessStatusCode();
-
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<Result>(responseContent);
-                    result.Data = responseContent;
-
-                    return result;
+                    throw new ActiveCampaignApiClientResponseException(result.Message);
                 }
+                
+                result.Data = responseContent;
+
+                return result;
             }
             catch (HttpRequestException e)
             {
-                throw new ActiveCampaignApiClientException(e.Message);
+                throw new ActiveCampaignApiClientHttpException(e.Message);
             }
         }
-}
-
+    }
 }
