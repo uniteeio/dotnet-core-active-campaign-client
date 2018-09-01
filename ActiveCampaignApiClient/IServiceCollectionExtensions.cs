@@ -12,7 +12,7 @@ namespace ActiveCampaignApiClient
         private const string Identifier = "ActiveCampaign";
         
         public static IServiceCollection AddActiveCampaignApiClient(this IServiceCollection services,
-            IConfigurationRoot configuration)
+            IConfiguration configuration)
         {
             services.AddOptions();
             services.Configure<ActiveCampaignApiClientOptions>(configuration.GetSection(Identifier));
