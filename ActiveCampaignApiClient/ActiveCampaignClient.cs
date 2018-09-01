@@ -7,12 +7,12 @@ using Newtonsoft.Json;
 
 namespace ActiveCampaignApiClient
 {
-    public class ActiveCampaignApiClient : IActiveCampaignApiClient
+    public class ActiveCampaignClient : IActiveCampaignApiClient
     {
-        private readonly ActiveCampaignApiClientOptions _options;
+        private readonly ActiveCampaignClientOptions _options;
         private readonly HttpClient _httpClient;
 
-        public ActiveCampaignApiClient(HttpClient httpClient, ActiveCampaignApiClientOptions options)
+        public ActiveCampaignClient(HttpClient httpClient, ActiveCampaignClientOptions options)
         {
             _options = options;
             _httpClient = httpClient;
@@ -24,7 +24,7 @@ namespace ActiveCampaignApiClient
             return $"{_options.BaseUri}/admin/api.php?api_action={apiAction}&api_key={_options.ApiKey}&api_output=json";
         }
 
-        public async Task<ActiveCampaignApiClientResult> Call(string apiAction, Dictionary<string, string> parameters)
+        public async Task<ActiveCampaignClientResult> Call(string apiAction, Dictionary<string, string> parameters)
         {
             var uri = BuildUri(apiAction);
 
@@ -37,11 +37,11 @@ namespace ActiveCampaignApiClient
                 response.EnsureSuccessStatusCode();
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ActiveCampaignApiClientResult>(responseContent);
+                var result = JsonConvert.DeserializeObject<ActiveCampaignClientResult>(responseContent);
 
                 if (result.Code == 0)
                 {
-                    throw new ActiveCampaignApiClientResponseException(result.Message);
+                    throw new ActiveCampaignClientResponseException(result.Message);
                 }
                 
                 result.Data = responseContent;
@@ -50,7 +50,7 @@ namespace ActiveCampaignApiClient
             }
             catch (HttpRequestException e)
             {
-                throw new ActiveCampaignApiClientHttpException(e.Message);
+                throw new ActiveCampaignClientHttpException(e.Message);
             }
         }
     }

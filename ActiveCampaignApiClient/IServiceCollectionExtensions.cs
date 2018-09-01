@@ -15,14 +15,14 @@ namespace ActiveCampaignApiClient
             IConfiguration configuration)
         {
             services.AddOptions();
-            services.Configure<ActiveCampaignApiClientOptions>(configuration.GetSection(Identifier));
+            services.Configure<ActiveCampaignClientOptions>(configuration.GetSection(Identifier));
             services.TryAddSingleton<HttpClient>();
             services.AddHttpClient(Identifier);
             services.TryAddTransient<IActiveCampaignApiClient>((sp) =>
             {
-                var options = sp.GetService<IOptions<ActiveCampaignApiClientOptions>>().Value;
+                var options = sp.GetService<IOptions<ActiveCampaignClientOptions>>().Value;
                 var factory = sp.GetService<IHttpClientFactory>();
-                return new ActiveCampaignApiClient(factory.CreateClient(Identifier), options);
+                return new ActiveCampaignClient(factory.CreateClient(Identifier), options);
             });
 
             return services;

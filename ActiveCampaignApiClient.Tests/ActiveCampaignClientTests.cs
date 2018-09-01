@@ -12,17 +12,17 @@ using Xunit;
 
 namespace ActiveCampaignApiClient.Tests
 {
-    public class ActiveCampaignApiClientTests
+    public class ActiveCampaignClientTests
     {
-        private ActiveCampaignApiClient _activeCampaignApiClient;
+        private ActiveCampaignClient _activeCampaignClient;
         private FakeMessageHandler _handler;
 
-        public ActiveCampaignApiClientTests()
+        public ActiveCampaignClientTests()
         {
             _handler = new FakeMessageHandler();
             var httpClient = new HttpClient(_handler);
             
-            _activeCampaignApiClient = new ActiveCampaignApiClient(httpClient, new ActiveCampaignApiClientOptions
+            _activeCampaignClient = new ActiveCampaignClient(httpClient, new ActiveCampaignClientOptions
             {
                 ApiKey = "abc",
                 BaseUri = "http://localhost"
@@ -34,23 +34,23 @@ namespace ActiveCampaignApiClient.Tests
         {
             _handler.Response = GetResponseFromFile(@"Response.json");
 
-            var res = await _activeCampaignApiClient.Call("contact_list", new Dictionary<string, string>());
+            var res = await _activeCampaignClient.Call("contact_list", new Dictionary<string, string>());
             
-            Assert.IsType<ActiveCampaignApiClientResult>(res);
+            Assert.IsType<ActiveCampaignClientResult>(res);
         }
         
         [Fact]
         public async Task CallShouldThrowException_WhenApiReturnDomainError()
         {
             _handler.Response = GetResponseFromFile(@"EmptyResponse.json");
-            await Assert.ThrowsAsync<ActiveCampaignApiClientResponseException>(() => _activeCampaignApiClient.Call("contact_list", new Dictionary<string, string>()));
+            await Assert.ThrowsAsync<ActiveCampaignClientResponseException>(() => _activeCampaignClient.Call("contact_list", new Dictionary<string, string>()));
         }
         
         [Fact]
         public async Task CallShouldThrowException_WhenApiReturnHttpError()
         {
             _handler.Response =  new HttpResponseMessage {StatusCode = HttpStatusCode.BadRequest};
-            await Assert.ThrowsAsync<ActiveCampaignApiClientHttpException>(() => _activeCampaignApiClient.Call("contact_list", new Dictionary<string, string>()));
+            await Assert.ThrowsAsync<ActiveCampaignClientHttpException>(() => _activeCampaignClient.Call("contact_list", new Dictionary<string, string>()));
         }
 
         private HttpResponseMessage GetResponseFromFile(string file)

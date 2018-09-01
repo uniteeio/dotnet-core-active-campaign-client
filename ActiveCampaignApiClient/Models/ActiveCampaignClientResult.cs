@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace ActiveCampaignApiClient.Models
 {
-    public class ActiveCampaignApiClientResult
+    public class ActiveCampaignClientResult
     {
         [JsonProperty("result_code")]
         public int Code { get; set; }
