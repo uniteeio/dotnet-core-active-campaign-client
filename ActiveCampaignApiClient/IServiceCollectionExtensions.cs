@@ -18,7 +18,7 @@ namespace ActiveCampaignApiClient
             services.Configure<ActiveCampaignClientOptions>(configuration.GetSection(Identifier));
             services.TryAddSingleton<HttpClient>();
             services.AddHttpClient(Identifier);
-            services.TryAddTransient<IActiveCampaignApiClient>((sp) =>
+            services.TryAddTransient<IActiveCampaignClient>((sp) =>
             {
                 var options = sp.GetService<IOptions<ActiveCampaignClientOptions>>().Value;
                 var factory = sp.GetService<IHttpClientFactory>();

@@ -4,7 +4,7 @@ using ActiveCampaignApiClient.Models;
 
 namespace ActiveCampaignApiClient
 {
-    public interface IActiveCampaignApiClient
+    public interface IActiveCampaignClient
     {
         Task<ActiveCampaignClientResult> Call(string apiAction, Dictionary<string, string> parameters);
     }

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace ActiveCampaignApiClient
 {
-    public class ActiveCampaignClient : IActiveCampaignApiClient
+    public class ActiveCampaignClient : IActiveCampaignClient
     {
         private readonly ActiveCampaignClientOptions _options;
         private readonly HttpClient _httpClient;
