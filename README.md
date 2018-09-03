@@ -32,7 +32,7 @@ public void ConfigureServices(IServiceCollection services)
 ## Usage
 Inject ActiveCampaignClient service in your class (controller, ...) : 
 <pre>
-private IActiveCampaignClient _activeCampaignClient;
+private readonly IActiveCampaignClient _activeCampaignClient;
 
 public ValuesController(IActiveCampaignClient activeCampaignClient)
 {
