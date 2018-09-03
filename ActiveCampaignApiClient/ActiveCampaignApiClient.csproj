@@ -1,14 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <Authors>FabienP</Authors>
         <PackageId>unitee.activecampaignapiclient</PackageId>
         <Version>1.0.3</Version>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <VersionPrefix>1.0.3</VersionPrefix>
         <Title>.NET Core Active Campaign client</Title>
         <Description>A .NET Core api client for Active Campaign V2 API</Description>
         <PackageProjectUrl>https://www.nuget.org/packages/ActiveCampaignApiClient/</PackageProjectUrl>
         <RepositoryUrl>https://github.com/uniteeio/dotnet-core-active-campaign-client</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
