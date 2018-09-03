@@ -1,6 +1,6 @@
 # A .NET Core 2 client for Active Campaign V2 API
 
-Nuget package can be found here : https://www.nuget.org/packages/unitee.activecampaignapiclient
+Nuget package can be found here : https://www.nuget.org/packages/Unitee.ActiveCampaign.ApiClient
 ## Configuration
 
 Add Active Campaign API Key and host in the root of your appsettings.json :
