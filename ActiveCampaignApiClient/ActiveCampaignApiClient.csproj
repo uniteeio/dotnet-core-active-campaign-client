@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
         <Authors>FabienP</Authors>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Title>.NET Core Active Campaign client</Title>
         <Description>A .NET Core api client for Active Campaign V2 API</Description>
         <PackageProjectUrl>https://www.nuget.org/packages/ActiveCampaignApiClient/</PackageProjectUrl>
