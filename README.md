@@ -44,11 +44,11 @@ Use Call method to retreive data. First param is the Active Campaign RPC action,
 <pre>
 // GET api/values
 [HttpGet]
-public async Task<ActionResult<ActiveCampaignClientResult>> Get()
+public async Task&lt;ActionResult&lt;ActiveCampaignClientResult>> Get()
 {
     var activeCampaignClientResult = await _activeCampaignClient.Call(
             "contact_list", 
-            new Dictionary<string, string> {{"ids", "all"}}
+            new Dictionary&lt;string, string> {{"ids", "all"}}
      );
     
     return activeCampaignClientResult;
