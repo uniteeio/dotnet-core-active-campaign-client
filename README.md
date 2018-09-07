@@ -1,7 +1,9 @@
 # A .NET Core 2 client for Active Campaign V2 API
 
 Nuget package can be found here : https://www.nuget.org/packages/Unitee.ActiveCampaign.ApiClient
-## Configuration
+
+## Usage for a dotnet core mvc application
+### Configuration
 
 Add Active Campaign API Key and host in the root of your appsettings.json :
 
@@ -29,7 +31,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 </pre>
         
-## Usage
+### Controller
 Inject ActiveCampaignClient service in your class (controller, ...) : 
 <pre>
 private readonly IActiveCampaignClient _activeCampaignClient;
@@ -41,7 +43,7 @@ public ValuesController(IActiveCampaignClient activeCampaignClient)
 </pre>
 
 Use Call method to retreive data. First param is the Active Campaign RPC action, second param is the query parameters :
-<pre>
+```
 // GET api/values
 [HttpGet]
 public async Task<ActionResult<ActiveCampaignClientResult>> Get()
@@ -53,4 +55,6 @@ public async Task<ActionResult<ActiveCampaignClientResult>> Get()
     
     return activeCampaignClientResult;
 }
-</pre>
+```
+
+Other RPC actions are described in activeCampaign official [documentation](https://www.activecampaign.com/api/overview.php)
