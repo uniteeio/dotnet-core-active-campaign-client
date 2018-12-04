@@ -2,6 +2,10 @@
 
 Nuget package can be found here : https://www.nuget.org/packages/Unitee.ActiveCampaign.ApiClient
 
+## Install package
+
+dotnet add package Unitee.ActiveCampaign.ApiClient
+
 ## Usage for a dotnet core mvc application
 ### Configuration
 
@@ -42,7 +46,7 @@ public ValuesController(IActiveCampaignClient activeCampaignClient)
 }
 </pre>
 
-Use Call method to retreive data. First param is the Active Campaign RPC action, second param is the query parameters :
+Use Call method to retrieve data. First param is the Active Campaign RPC action, second param is the query parameters :
 ```
 // GET api/values
 [HttpGet]
